@@ -8,7 +8,6 @@ def animesearch(query,searchresult=3,show=0):
     anime_dict = {}
     for title in soup.find_all('div',class_='title')[:searchresult]:
         anime_dict[title.a.text] = title.a['href']
-        print(title.a.text)
     return anime_dict
 #returns a dictionary in this form {"title 1":"link 1","title 2":"link 2","title 3":"link 3"....}
 
@@ -52,7 +51,6 @@ def mangasearch(query,searchresult=3,show=0):
     soup = BeautifulSoup(req.text,'lxml')
     manga_dict = {}
     for i in soup.find_all('a',class_="hoverinfo_trigger fw-b")[:searchresult]:
-        print(i.text)
         manga_dict[i.text] = i["href"]
     return manga_dict
 #returns a dictionary in this form {"title 1":"link 1","title 2":"link 2","title 3":"link 3"....}
