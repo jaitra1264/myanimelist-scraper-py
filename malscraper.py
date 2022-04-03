@@ -2,8 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 
 #scraping anime search results
-def animesearch(query,searchresult=3,show=0):
-    req = requests.get('https://myanimelist.net/anime.php?cat=anime&q='+query+'&show='+str(show*50))
+def animesearch(query,searchresult=3,page=0):
+    req = requests.get('https://myanimelist.net/anime.php?cat=anime&q='+query+'&show='+str(page*50))
     soup = BeautifulSoup(req.text,'lxml')
     anime_dict = {}
     for title in soup.find_all('div',class_='title')[:searchresult]:
@@ -46,8 +46,8 @@ def animeinfo(query):
 #returns a dictionary with all the available info about the anime
 
 #scraping manga search results
-def mangasearch(query,searchresult=3,show=0):
-    req = requests.get('https://myanimelist.net/manga.php?cat=manga&q='+query+'&show='+str(show*50))
+def mangasearch(query,searchresult=3,page=0):
+    req = requests.get('https://myanimelist.net/manga.php?cat=manga&q='+query+'&show='+str(page*50))
     soup = BeautifulSoup(req.text,'lxml')
     manga_dict = {}
     for i in soup.find_all('a',class_="hoverinfo_trigger fw-b")[:searchresult]:
