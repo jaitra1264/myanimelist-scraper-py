@@ -4,7 +4,13 @@ import requests
 
 #scraping anime search results
 def animesearch(query,searchresult=3,page=0):
-    req = requests.get('https://myanimelist.net/anime.php?cat=anime&q='+query+'&show='+str(page*50))
+    try:
+        req = requests.get('https://myanimelist.net/anime.php?cat=anime&q='+query+'&show='+str(page*50))
+    except Exception as e:
+        print("Invalid request")
+        print(e)
+        return
+
     soup = BeautifulSoup(req.text,'lxml')
     anime_dict = {}
     for title in soup.find_all('div',class_='title')[:searchresult]:
@@ -15,7 +21,13 @@ def animesearch(query,searchresult=3,page=0):
 
 #scraping anime info from particular anime page
 def animeinfo(query):
-    req = requests.get(query)
+    try:
+        req = requests.get(query)
+    except Exception as e:
+        print("Invalid request")
+        print(e)
+        return
+
     soup = BeautifulSoup(req.text,'lxml')
     anime = soup.find_all('div',class_='spaceit_pad')
     anime_dict = {}
@@ -48,7 +60,13 @@ def animeinfo(query):
 
 #scraping manga search results
 def mangasearch(query,searchresult=3,page=0):
-    req = requests.get('https://myanimelist.net/manga.php?cat=manga&q='+query+'&show='+str(page*50))
+    try:
+        req = requests.get('https://myanimelist.net/manga.php?cat=manga&q='+query+'&show='+str(page*50))
+    except Exception as e:
+        print("Invalid request")
+        print(e)
+        return
+
     soup = BeautifulSoup(req.text,'lxml')
     manga_dict = {}
     for i in soup.find_all('a',class_="hoverinfo_trigger fw-b")[:searchresult]:
@@ -59,7 +77,12 @@ def mangasearch(query,searchresult=3,page=0):
 
 #scraping manga info from particular manga page
 def mangainfo(query):
-    req = requests.get(query)
+    try:
+        req = requests.get(query)
+    except:
+        print("Invalid request")
+        print(e)
+        return
     soup = BeautifulSoup(req.text,'lxml')
     manga = soup.find_all("div",class_="spaceit_pad")
     image = soup.find('div',class_='leftside')
