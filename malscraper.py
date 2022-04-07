@@ -79,7 +79,7 @@ def mangasearch(query,searchresult=3,page=0):
 def mangainfo(query):
     try:
         req = requests.get(query)
-    except:
+    except Exception as e:
         print("Invalid request")
         print(e)
         return
