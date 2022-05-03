@@ -1,11 +1,14 @@
+from re import search
 import lxml
 from bs4 import BeautifulSoup
 import requests
 
 #scraping anime search results
-def animesearch(query,searchresult=3,page=0):
+def animesearch(query,searchresult=3,page=1):
+    if searchresult >= 49:
+        searchresult = 49
     try:
-        req = requests.get('https://myanimelist.net/anime.php?cat=anime&q='+query+'&show='+str(page*50))
+        req = requests.get('https://myanimelist.net/anime.php?cat=anime&q='+query+'&show='+str((page-1)*50))
     except Exception as e:
         print("Invalid request")
         print(e)
@@ -59,9 +62,11 @@ def animeinfo(query):
 #returns a dictionary with all the available info about the anime
 
 #scraping manga search results
-def mangasearch(query,searchresult=3,page=0):
+def mangasearch(query,searchresult=3,page=1):
+    if searchresult >= 49:
+        searchresult = 49
     try:
-        req = requests.get('https://myanimelist.net/manga.php?cat=manga&q='+query+'&show='+str(page*50))
+        req = requests.get('https://myanimelist.net/manga.php?cat=manga&q='+query+'&show='+str((page-1)*50))
     except Exception as e:
         print("Invalid request")
         print(e)
@@ -112,3 +117,24 @@ def mangainfo(query):
         pass
     return manga_dict
 #returns a dictionary with all the available info about the manga
+
+
+#scraping top anime list
+#search result maximum value 49
+#possible values for type: airing, upcoming, tv, movie, ova, ona, special, bypopularity, favorite or an empty string for overall top
+def topanime(searchresult=3,type='',page=1):
+    if searchresult >= 49:
+        searchresult = 49
+    try:
+        req = requests.get("https://myanimelist.net/topanime.php?type="+ type + '&limit='+str((page-1)*50))
+    except Exception as e:
+        print("Invalid request")
+        print(e)
+    soup = BeautifulSoup(req.text,'lxml')
+    details_div = soup.find_all('div',class_='detail')[:searchresult]
+    top_dict = {}
+    for j  in details_div:
+        i = j.find('a')
+        top_dict[i.text] = i['href']
+    return top_dict
+#returns a dictionary in form {"title 1":"link 1","title 2":"link 2","title 3":"link 3"....}
