@@ -71,4 +71,17 @@ mangainfo('https://myanimelist.net/manga/96792/Kimetsu_no_Yaiba')
 topanime(5,'airing',1)
 ```
 
+### topmanga
+```python
+#syntax
+#topmanga(searchresult=3,type='',page=1)
+#searchresult is the number of searchresults returned (max 49)
+#page is the page number of search result by default it is 1 (page 1)
+#type is type of top manga list, possible values for type: manga, oneshots, doujin, lightnovels, novels, manhwa, manhua, bypopularity, favorite or an empty string for overall top
+
+#returns {'Monogatari Series: First Season': 'https://myanimelist.net/manga/14893/Monogatari_Series__First_Season', 'Monogatari Series: Second Season': 'https://myanimelist.net/manga/23751/Monogatari_Series__Second_Season', 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e': 'https://myanimelist.net/manga/89357/Youkoso_Jitsuryoku_Shijou_Shugi_no_Kyoushitsu_e', 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e: 2-nensei-hen': 'https://myanimelist.net/manga/123992/Youkoso_Jitsuryoku_Shijou_Shugi_no_Kyoushitsu_e__2-nensei-hen', 'Ookami to Koushinryou': 'https://myanimelist.net/manga/9115/Ookami_to_Koushinryou'}
+
+(topmanga(5,'lightnovels')
+
+```
 
