@@ -6,6 +6,7 @@ Unofficial myanimelist scraper
 - animeinfo
 - mangasearch
 - mangainfo
+- topanime
 
 ## Usage
 ### animesearch
@@ -13,9 +14,9 @@ Unofficial myanimelist scraper
 ```python
 
 #syntax
-#animesearch(searchQuery,searchresult=3,page=0)
-#searchresult is the number of searchresults returned (max 50)
-#page is the page number of search result by default it is 0 (page 1)
+#animesearch(searchQuery,searchresult=3,page=1)
+#searchresult is the number of searchresults returned (max 49)
+#page is the page number of search result by default it is 1 (page 1)
 
 #returns {'One Piece Movie 1': 'https://myanimelist.net/anime/459/One_Piece_Movie_1', 'One Piece Film: Z': 'https://myanimelist.net/anime/12859/One_Piece_Film__Z', 'One Piece Film: Gold': 'https://myanimelist.net/anime/31490/One_Piece_Film__Gold'}
 animesearch("One piece")
@@ -36,9 +37,9 @@ animeinfo('https://myanimelist.net/anime/37521/Vinland_Saga')
 
 ```python
 #syntax
-#mangasearch(searchQuery,searchresult=3,page=0)
-#searchresult is the number of searchresults returned (max 50)
-#page is the page number of search result by default it is 0 (page 1)
+#mangasearch(searchQuery,searchresult=3,page=1)
+#searchresult is the number of searchresults returned (max 49)
+#page is the page number of search result by default it is 1 (page 1)
 
 #returns {'Jujutsu Kaisen': 'https://myanimelist.net/manga/113138/Jujutsu_Kaisen', 'Jujutsu Kaisen 0: Tokyo Toritsu Jujutsu Koutou Senmon Gakkou': 'https://myanimelist.net/manga/115710/Jujutsu_Kaisen_0__Tokyo_Toritsu_Jujutsu_Koutou_Senmon_Gakkou', 'Jujutsu Kaisen: Yoake no Ibara Michi': 'https://myanimelist.net/manga/133048/Jujutsu_Kaisen__Yoake_no_Ibara_Michi'}
 mangasearch("Jujutsu kaisen")
@@ -54,6 +55,20 @@ mangasearch("Jujutsu kaisen")
 #returns {'Synonyms:': 'Blade of Demon Destruction', 'Japanese:': '鬼滅の刃', 'English:': 'Demon Slayer: Kimetsu no Yaiba', 'German:': 'Demon Slayer - Kimetsu no Yaiba', 'Spanish:': 'Guardianes de la noche', 'French:': 'Demon Slayer', 'Type:': 'Manga', 'Volumes:': '23', 'Chapters:': '207', 'Status:': 'Finished', 'Published:': 'Feb  15, 2016 to May  18, 2020', 'Genres:': 'Action, Fantasy, Historical, Shounen', 'Theme:': 'Historical                Historical', 'Demographic:': 'Shounen                Shounen', 'Serialization:': 'Shounen Jump (Weekly)', 'Authors:': 'Gotouge, Koyoharu (Story & Art)', 'Score:': '8.301', 'Ranked:': "#2812 2 based on the top manga page. Please note that 'R18+' titles are excluded.", 'Popularity:': '#12', 'Members:': '328,103', 'Favorites:': '24,764', 'synopsis': "Tanjirou Kamado lives with his impoverished family on a remote mountain. As the oldest sibling, he took upon the responsibility of ensuring his family's livelihood after the death of his father. On a cold winter day, he goes down to the local village in order to sell some charcoal. As dusk falls, he is forced to spend the night in the house of a curious man who cautions him of strange creatures that roam the night: malevolent demons who crave human flesh.When he finally makes his way home, Tanjirou's worst nightmare comes true. His entire family has been brutally slaughtered with the sole exception of his sister Nezuko, who has turned into a flesh-eating demon. Engulfed in hatred and despair, Tanjirou desperately tries to stop Nezuko from attacking other people, setting out on a journey to avenge his family and find a way to turn his beloved sister back into a human.", 'image': 'https://cdn.myanimelist.net/images/manga/3/179023.jpg'}
 
 mangainfo('https://myanimelist.net/manga/96792/Kimetsu_no_Yaiba')
+```
+
+### topanime
+```python
+#syntax
+#topanime(searchresult=3,type='',page=1)
+#searchresult is the number of searchresults returned (max 49)
+#page is the page number of search result by default it is 1 (page 1)
+#type is type of top anime list, possible values for type is: airing, upcoming, tv, movie, ova, ona, special, bypopularity, favorite or an empty string for overall top anime list
+
+#returns {'Spy x Family': 'https://myanimelist.net/anime/50265/Spy_x_Family', 'Kaguya-sama wa Kokurasetai: Ultra Romantic': 'https://myanimelist.net/anime/43608/Kaguya-sama_wa_Kokurasetai__Ultra_Romantic', 'Kingdom 4th Season': 'https://myanimelist.net/anime/50160/Kingdom_4th_Season', 'One Piece': 'https://myanimelist.net/anime/21/One_Piece', 'Paripi Koumei': 'https://myanimelist.net/anime/50380/Paripi_Koumei'}
+
+
+topanime(5,'airing',1)
 ```
 
 
