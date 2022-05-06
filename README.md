@@ -7,6 +7,7 @@ Unofficial myanimelist scraper
 - mangasearch
 - mangainfo
 - topanime
+- topmanga
 
 ## Usage
 ### animesearch
