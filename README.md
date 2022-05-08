@@ -7,6 +7,7 @@ Unofficial myanimelist scraper
 - mangasearch
 - mangainfo
 - topanime
+- topmanga
 
 ## Usage
 ### animesearch
@@ -81,7 +82,7 @@ topanime(5,'airing',1)
 
 #returns {'Monogatari Series: First Season': 'https://myanimelist.net/manga/14893/Monogatari_Series__First_Season', 'Monogatari Series: Second Season': 'https://myanimelist.net/manga/23751/Monogatari_Series__Second_Season', 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e': 'https://myanimelist.net/manga/89357/Youkoso_Jitsuryoku_Shijou_Shugi_no_Kyoushitsu_e', 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e: 2-nensei-hen': 'https://myanimelist.net/manga/123992/Youkoso_Jitsuryoku_Shijou_Shugi_no_Kyoushitsu_e__2-nensei-hen', 'Ookami to Koushinryou': 'https://myanimelist.net/manga/9115/Ookami_to_Koushinryou'}
 
-(topmanga(5,'lightnovels')
+topmanga(5,'lightnovels')
 
 ```
 
