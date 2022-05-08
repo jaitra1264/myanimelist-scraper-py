@@ -3,22 +3,39 @@ import lxml
 from bs4 import BeautifulSoup
 import requests
 
+
+class animeSearchResult:
+
+    def __init__(self,title,link,id):
+        self.title = title
+        self.link = link
+        self.id = id
+    def __str__(self):
+        return self.title
+    def __repr__(self):
+        return self.title
+
 #scraping anime search results
 def animesearch(query,searchresult=3,page=1):
     if searchresult >= 49:
         searchresult = 49
+
     try:
+
         req = requests.get('https://myanimelist.net/anime.php?cat=anime&q='+query+'&show='+str((page-1)*50))
+
     except Exception as e:
+
         print("Invalid request")
         print(e)
         return
 
     soup = BeautifulSoup(req.text,'lxml')
-    anime_dict = {}
+    anime_lst = []
     for title in soup.find_all('div',class_='title')[:searchresult]:
-        anime_dict[title.a.text] = title.a['href']
-    return anime_dict
+        anime_lst.append(animeSearchResult(title.a.text,title.a['href'],title.a['href'].split('/')[-2]))
+
+    return anime_lst
 #returns a dictionary in this form {"title 1":"link 1","title 2":"link 2","title 3":"link 3"....}
 
 
