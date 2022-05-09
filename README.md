@@ -1,5 +1,28 @@
 # myanimelist-scraper-py
 Unofficial myanimelist scraper
+ 
+  
+## Anime
+
+### Example
+```python
+anime = Anime()
+
+anime.search("Demon slayer")
+#creates and returns a new atrribute searchResult = [Kimetsu no Yaiba, Kimetsu no Yaiba Movie: Mugen Ressha-hen, Kimetsu no Yaiba: Mugen Ressha-hen]
+#each element in the list has 3 attributes, title, id and link
+#search method has 2 optional parameters anime.search(searchQuery,searchresult=3,page=1)
+#searchresult is the number of searchresults returned (max 49)
+#page is the page number of search result by default it is 1 (page 1)
+
+anime.info(anime.searchResult[0].link)
+#This creates 20 attributes (aired, episodes, imageurl, members, rank, status, titleEn, favorites, popularity, rating, studio, titleJa, duration, genre, licensors, producers, score, source, synopsis, type)
+#And a dictionary {'Synonyms': 'Blade of Demon Destruction', 'Japanese': '鬼滅の刃', 'English': 'Demon Slayer: Kimetsu no Yaiba', 'German': 'Demon Slayer', 'Spanish': 'Guardianes De La Noche: Kimetsu no Yaiba', 'French': 'Demon Slayer', 'Type': 'TV', 'Episodes': '26', 'Status': 'Finished Airing', 'Aired': 'Apr 6, 2019 to Sep 28, 2019', 'Premiered': 'Spring 2019', 'Broadcast': 'Saturdays at 23:30 (JST)', 'Producers': 'Aniplex,       Shueisha', 'Licensors': 'Aniplex of America', 'Studios': 'ufotable', 'Source': 'Manga', 'Genres': 'Action, Fantasy, Historical, Shounen', 'Theme': 'HistoricalHistorical', 'Demographic': 'ShounenShounen', 'Duration': '23 min. per ep.', 'Rating': 'R - 17+ (violence & profanity)', 'Score': '8.551 (scored by 16671281,667,128 users)      1          indicates a weighted score.', 'Ranked': "#9022    based on the top anime page. Please note that 'Not yet aired' and 'R18+' titles are excluded.", 'Popularity': '#9', 'Members': '2,403,420', 'Favorites': '79,305', 'synopsis': "Ever since the death of his father, the burden of supporting the family has fallen upon Tanjirou Kamado's shoulders. Though living impoverished on a remote mountain, the Kamado family are able to enjoy a relatively peaceful and happy life. One day, Tanjirou decides to go down to the local village to make a little money selling charcoal. On his way back, night falls, forcing Tanjirou to take shelter in the house of a strange man, who warns him of the existence of flesh-eating demons that lurk in the woods at night.When he finally arrives back home the next day, he is met with a horrifying sight—his whole family has been slaughtered. Worse still, the sole survivor is his sister Nezuko, who has been turned into a bloodthirsty demon. Consumed by rage and hatred, Tanjirou swears to avenge his family and stay by his only remaining sibling. Alongside the mysterious group calling themselves the Demon Slayer Corps, Tanjirou will do whatever it takes to slay the demons and protect the remnants of his beloved sister's humanity.", 'image': 'https://cdn.myanimelist.net/images/anime/1286/99889.jpg'}
+
+print(anime.episodes) #prints '26'
+
+```
+
 
 ## List of functions
 - animesearch
