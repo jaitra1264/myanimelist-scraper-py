@@ -3,6 +3,60 @@ import lxml
 from bs4 import BeautifulSoup
 import requests
 
+class Anime:
+
+    def __init__(self):
+        self.dict = "Use info method to get info on an anime"
+    
+    def __str__(self):
+        return self.dict
+        
+    def search(self,query,searchresult=3,page=1):
+        self.searchResult = animesearch(query,searchresult,page)
+        return self.searchResult
+
+    def info(self,query):
+        self.dict = animeinfo(query)
+        try:self.titleJa = self.dict['Japanese']
+        except:pass
+        try:self.titleEn = self.dict['English']
+        except:pass
+        try:self.type = self.dict['Type']
+        except:pass
+        try:self.episodes = self.dict['Episodes']
+        except:pass
+        try:self.status = self.dict['Status']
+        except:pass
+        try:self.aired = self.dict['Aired']
+        except:pass
+        try:self.producers = self.dict['Producers']
+        except:pass
+        try:self.licensors = self.dict['Licensors']
+        except:pass
+        try:self.studio = self.dict['Studios']
+        except:pass
+        try:self.source = self.dict['Source']
+        except:pass
+        try:self.genre = self.dict['Genres']
+        except:pass
+        try:self.duration = self.dict['Duration']
+        except:pass
+        try:self.rating = self.dict['Rating']
+        except:pass
+        try:self.score = self.dict['Score'][:5]
+        except:pass
+        try:self.rank = self.dict['Ranked'][:-97]
+        except:pass
+        try:self.popularity = self.dict['Popularity']
+        except:pass
+        try:self.members = self.dict["Members"]
+        except:pass
+        try:self.favorites = self.dict['Favorites']
+        except:pass
+        try:self.synopsis = self.dict['synopsis']
+        except:pass
+        try:self.imageurl = self.dict['image']
+        except:pass
 
 class animeSearchResult:
 
@@ -55,14 +109,14 @@ def animeinfo(query):
     
     for info in anime:
         try:
-            anime_dict[info.span.text] = info.text.replace('\n','').replace(info.span.text,'').strip()
+            anime_dict[info.span.text.replace(':','')] = info.text.replace('\n','').replace(info.span.text,'').strip()
             if info.span.text == 'Genres:':
                 genre = ''
                 for i in soup.find_all('span',attrs={"itemprop":'genre'}):
                     genre += i.text.strip()+', '
-                anime_dict['Genres:'] = genre[:-2]
+                anime_dict['Genres'] = genre[:-2]
             if info.span.text == 'Score:':
-                anime_dict[info.span.text] = anime_dict[info.span.text][:5] 
+                anime_dict[info.span.text.replace(':','')] = anime_dict[info.span.text][:5] 
         except:
             pass
 
