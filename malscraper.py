@@ -17,6 +17,8 @@ class Anime:
 
     def info(self,query):
         self.dict = animeinfo(query)
+        try:self.title = self.dict['title']
+        except:pass
         try:self.titleJa = self.dict['Japanese']
         except:pass
         try:self.titleEn = self.dict['English']
@@ -60,6 +62,8 @@ class Anime:
 
     def infoByID(self,query):
         self.dict = animeinfoID(query)
+        try:self.title = self.dict['title']
+        except:pass
         try:self.titleJa = self.dict['Japanese']
         except:pass
         try:self.titleEn = self.dict['English']
@@ -150,7 +154,7 @@ def animeinfo(query):
     anime = soup.find_all('div',class_='spaceit_pad')
     anime_dict = {}
     image = soup.find('div',class_='leftside')
-    
+    title = soup.find('h1',class_='title-name h1_bold_none')
     for info in anime:
         try:
             anime_dict[info.span.text.replace(':','')] = info.text.replace('\n','').replace(info.span.text,'').strip()
@@ -168,6 +172,9 @@ def animeinfo(query):
         anime_dict['synopsis'] = soup.find('p',attrs={"itemprop":'description'}).text.replace('\n','').replace('\r','').replace('[Written by MAL Rewrite]','').replace('"','').replace('\\','')
     except:
         pass
+
+    try:anime_dict['title'] = title.text
+    except:pass
 
     try:
         anime_dict['image'] = image.a.contents[1]['data-src']
@@ -190,6 +197,7 @@ def animeinfoID(query):
     anime = soup.find_all('div',class_='spaceit_pad')
     anime_dict = {}
     image = soup.find('div',class_='leftside')
+    title = soup.find('h1',class_='title-name h1_bold_none')
 
     for info in anime:
         try:
@@ -208,6 +216,9 @@ def animeinfoID(query):
         anime_dict['synopsis'] = soup.find('p',attrs={"itemprop":'description'}).text.replace('\n','').replace('\r','').replace('[Written by MAL Rewrite]','').replace('"','').replace('\\','')
     except:
         pass
+
+    try:anime_dict['title'] = title.text
+    except:pass
 
     try:
         anime_dict['image'] = image.a.contents[1]['data-src']
@@ -246,6 +257,7 @@ def mangainfo(query):
     soup = BeautifulSoup(req.text,'lxml')
     manga = soup.find_all("div",class_="spaceit_pad")
     image = soup.find('div',class_='leftside')
+    title = soup.find('span',class_='h1-title')
 
     manga_dict = {}
     for info in manga:
@@ -265,6 +277,9 @@ def mangainfo(query):
         manga_dict['synopsis'] = soup.find('span',attrs={"itemprop":'description'}).text.replace('\n','').replace('\r','').replace('[Written by MAL Rewrite]','').replace('"','').replace('\\','')
     except:
         pass
+
+    try:manga_dict['title'] = title.text
+    except:pass
     
     try:
         manga_dict['image'] = image.a.contents[0]["data-src"]
