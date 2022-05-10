@@ -58,6 +58,49 @@ class Anime:
         try:self.imageurl = self.dict['image']
         except:pass
 
+    def infoByID(self,query):
+        self.dict = animeinfoID(query)
+        try:self.titleJa = self.dict['Japanese']
+        except:pass
+        try:self.titleEn = self.dict['English']
+        except:pass
+        try:self.type = self.dict['Type']
+        except:pass
+        try:self.episodes = self.dict['Episodes']
+        except:pass
+        try:self.status = self.dict['Status']
+        except:pass
+        try:self.aired = self.dict['Aired']
+        except:pass
+        try:self.producers = self.dict['Producers']
+        except:pass
+        try:self.licensors = self.dict['Licensors']
+        except:pass
+        try:self.studio = self.dict['Studios']
+        except:pass
+        try:self.source = self.dict['Source']
+        except:pass
+        try:self.genre = self.dict['Genres']
+        except:pass
+        try:self.duration = self.dict['Duration']
+        except:pass
+        try:self.rating = self.dict['Rating']
+        except:pass
+        try:self.score = self.dict['Score'][:5]
+        except:pass
+        try:self.rank = self.dict['Ranked'][:-97]
+        except:pass
+        try:self.popularity = self.dict['Popularity']
+        except:pass
+        try:self.members = self.dict["Members"]
+        except:pass
+        try:self.favorites = self.dict['Favorites']
+        except:pass
+        try:self.synopsis = self.dict['synopsis']
+        except:pass
+        try:self.imageurl = self.dict['image']
+        except:pass
+
 class animeSearchResult:
 
     def __init__(self,title,link,id):
@@ -94,6 +137,7 @@ def animesearch(query,searchresult=3,page=1):
 
 
 #scraping anime info from particular anime page
+#pass myanimelist anime link to scrape info
 def animeinfo(query):
     try:
         req = requests.get(query)
@@ -117,6 +161,46 @@ def animeinfo(query):
                 anime_dict['Genres'] = genre[:-2]
             if info.span.text == 'Score:':
                 anime_dict[info.span.text.replace(':','')] = anime_dict[info.span.text][:5] 
+        except:
+            pass
+
+    try:
+        anime_dict['synopsis'] = soup.find('p',attrs={"itemprop":'description'}).text.replace('\n','').replace('\r','').replace('[Written by MAL Rewrite]','').replace('"','').replace('\\','')
+    except:
+        pass
+
+    try:
+        anime_dict['image'] = image.a.contents[1]['data-src']
+    except:
+        pass
+    return anime_dict
+#returns a dictionary with all the available info about the anime
+
+#scraping anime info from particular anime page
+#pass myanimelist anime ID to scrape info
+def animeinfoID(query):
+    try:
+        req = requests.get("https://myanimelist.net/anime/"+str(query))
+    except Exception as e:
+        print("Invalid request")
+        print(e)
+        return
+
+    soup = BeautifulSoup(req.text,'lxml')
+    anime = soup.find_all('div',class_='spaceit_pad')
+    anime_dict = {}
+    image = soup.find('div',class_='leftside')
+
+    for info in anime:
+        try:
+            anime_dict[info.span.text.replace(':','')] = info.text.replace('\n','').replace(info.span.text,'').strip()
+            if info.span.text == 'Genres:':
+                genre = ''
+                for i in soup.find_all('span',attrs={"itemprop":'genre'}):
+                    genre += i.text.strip()+', '
+                anime_dict['Genres'] = genre[:-2]
+            if info.span.text == 'Score:':
+                anime_dict[info.span.text.replace(':','')] = anime_dict[info.span.text][:5]
         except:
             pass
 
