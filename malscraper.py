@@ -1,4 +1,3 @@
-from re import search
 import lxml
 from bs4 import BeautifulSoup
 import requests
