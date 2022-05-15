@@ -300,11 +300,11 @@ def topanime(searchresult=3,type='',page=1):
         print(e)
     soup = BeautifulSoup(req.text,'lxml')
     details_div = soup.find_all('div',class_='detail')[:searchresult]
-    top_dict = {}
+    top_lst = []
     for j  in details_div:
         i = j.find('a')
-        top_dict[i.text] = i['href']
-    return top_dict
+        top_lst.append(SearchResult(i.text,i['href'],i['href'].split('/')[-2]))
+    return top_lst
 #returns a dictionary in form {"title 1":"link 1","title 2":"link 2","title 3":"link 3"....}
 
 #scraping top manga list
@@ -320,9 +320,9 @@ def topmanga(searchresult=3,type='',page=1):
         print(e)
     soup = BeautifulSoup(req.text,'lxml')
     details_div = soup.find_all('div',class_='detail')[:searchresult]
-    top_dict = {}
+    top_lst = []
     for j  in details_div:
         i = j.find('a')
-        top_dict[i.text] = i['href']
-    return top_dict
+        top_lst.append(SearchResult(i.text,i['href'],i['href'].split('/')[-2]))
+    return top_lst
 #returns a dictionary in form {"title 1":"link 1","title 2":"link 2","title 3":"link 3"....}
