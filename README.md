@@ -89,7 +89,8 @@ animeinfoID(37521)
 #searchresult is the number of searchresults returned (max 49)
 #page is the page number of search result by default it is 1 (page 1)
 
-#returns {'Jujutsu Kaisen': 'https://myanimelist.net/manga/113138/Jujutsu_Kaisen', 'Jujutsu Kaisen 0: Tokyo Toritsu Jujutsu Koutou Senmon Gakkou': 'https://myanimelist.net/manga/115710/Jujutsu_Kaisen_0__Tokyo_Toritsu_Jujutsu_Koutou_Senmon_Gakkou', 'Jujutsu Kaisen: Yoake no Ibara Michi': 'https://myanimelist.net/manga/133048/Jujutsu_Kaisen__Yoake_no_Ibara_Michi'}
+#returns [Jujutsu Kaisen, Jujutsu Kaisen 0: Tokyo Toritsu Jujutsu Koutou Senmon Gakkou, Jujutsu Kaisen: Yoake no Ibara Michi]
+#each element in the list has 3 attributes, title, id and link
 ```
 ```python
 mangasearch("Jujutsu kaisen")
@@ -117,7 +118,7 @@ mangainfo('https://myanimelist.net/manga/96792/Kimetsu_no_Yaiba')
 #page is the page number of search result by default it is 1 (page 1)
 #type is type of top anime list, possible values for type is: airing, upcoming, tv, movie, ova, ona, special, bypopularity, favorite or an empty string for overall top anime list
 
-#returns {'Spy x Family': 'https://myanimelist.net/anime/50265/Spy_x_Family', 'Kaguya-sama wa Kokurasetai: Ultra Romantic': 'https://myanimelist.net/anime/43608/Kaguya-sama_wa_Kokurasetai__Ultra_Romantic', 'Kingdom 4th Season': 'https://myanimelist.net/anime/50160/Kingdom_4th_Season', 'One Piece': 'https://myanimelist.net/anime/21/One_Piece', 'Paripi Koumei': 'https://myanimelist.net/anime/50380/Paripi_Koumei'}
+#returns [Spy x Family, Kaguya-sama wa Kokurasetai: Ultra Romantic, Kingdom 4th Season, One Piece, Paripi Koumei]
 ```
 ```python
 topanime(5,'airing',1)
@@ -131,7 +132,7 @@ topanime(5,'airing',1)
 #page is the page number of search result by default it is 1 (page 1)
 #type is type of top manga list, possible values for type: manga, oneshots, doujin, lightnovels, novels, manhwa, manhua, bypopularity, favorite or an empty string for overall top
 
-#returns {'Monogatari Series: First Season': 'https://myanimelist.net/manga/14893/Monogatari_Series__First_Season', 'Monogatari Series: Second Season': 'https://myanimelist.net/manga/23751/Monogatari_Series__Second_Season', 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e': 'https://myanimelist.net/manga/89357/Youkoso_Jitsuryoku_Shijou_Shugi_no_Kyoushitsu_e', 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e: 2-nensei-hen': 'https://myanimelist.net/manga/123992/Youkoso_Jitsuryoku_Shijou_Shugi_no_Kyoushitsu_e__2-nensei-hen', 'Ookami to Koushinryou': 'https://myanimelist.net/manga/9115/Ookami_to_Koushinryou'}
+#returns[Monogatari Series: First Season, Monogatari Series: Second Season, Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e: 2-nensei-hen, Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e, Ookami to Koushinryou]
 ```
 ```python
 topmanga(5,'lightnovels')
