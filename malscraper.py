@@ -104,7 +104,7 @@ class Anime:
         try:self.imageurl = self.dict['image']
         except:pass
 
-class animeSearchResult:
+class SearchResult:
 
     def __init__(self,title,link,id):
         self.title = title
@@ -133,7 +133,7 @@ def animesearch(query,searchresult=3,page=1):
     soup = BeautifulSoup(req.text,'lxml')
     anime_lst = []
     for title in soup.find_all('div',class_='title')[:searchresult]:
-        anime_lst.append(animeSearchResult(title.a.text,title.a['href'],title.a['href'].split('/')[-2]))
+        anime_lst.append(SearchResult(title.a.text,title.a['href'],title.a['href'].split('/')[-2]))
 
     return anime_lst
 #returns a dictionary in this form {"title 1":"link 1","title 2":"link 2","title 3":"link 3"....}
@@ -238,12 +238,11 @@ def mangasearch(query,searchresult=3,page=1):
         return
 
     soup = BeautifulSoup(req.text,'lxml')
-    manga_dict = {}
-    for i in soup.find_all('a',class_="hoverinfo_trigger fw-b")[:searchresult]:
-        manga_dict[i.text] = i["href"]
-    return manga_dict
+    manga_lst = []
+    for manga in soup.find_all('a',class_="hoverinfo_trigger fw-b")[:searchresult]:
+        manga_lst.append(SearchResult(manga.text,manga["href"],manga["href"].split('/')[-2]))
+    return manga_lst
 #returns a dictionary in this form {"title 1":"link 1","title 2":"link 2","title 3":"link 3"....}
-
 
 #scraping manga info from particular manga page
 def mangainfo(query):
