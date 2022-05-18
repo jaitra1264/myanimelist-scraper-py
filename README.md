@@ -23,7 +23,27 @@ anime.infoByID(anime.searchResult[0].id)
 
 
 print(anime.episodes) #prints '26'
+```
+## Manga
+### Example
+```python
+manga = Manga()
 
+manga.search('fullmetal alchemist')
+#creates and returns a new atrribute searchResult = [Fullmetal Alchemist, Fullmetal Alchemist, Full Metal Alchemist: Prototype]
+#each element in the list has 3 attributes, title, id and link
+#search method has 2 optional parameters manga.search(searchQuery,searchresult=3,page=1)
+#searchresult is the number of search results returned (max 49)
+#page is the page number of search result by default it is 1 (page 1)
+
+manga.info(manga.searchResult[0].link)
+#OR
+manga.infoByID(manga.searchResult[0].link)
+#This creates 19 attributes (author, chapters, favorites, genre, imageurl, members, popularity, published, rank, score, serialization, status, synonyms, synopsis, title, titleEn, titleJa, type, volumes)
+#And a dictionary attribute called dict = {'Synonyms': 'Full Metal Alchemist, Hagane no Renkinjutsushi, FMA, HagaRen, Fullmetal Alchemist Gaiden', 'Japanese': '鋼の錬金術師', 'English': 'Fullmetal Alchemist', 'Type': 'Manga', 'Volumes': '27', 'Chapters': '116', 'Status': 'Finished', 'Published': 'Jul  12, 2001 to Sep  11, 2010', 'Genres': 'Action, Adventure, Award Winning, Drama, Fantasy, Military, Shounen', 'Theme': 'Military                Military', 'Demographic': 'Shounen                Shounen', 'Serialization': 'Shounen Gangan', 'Authors': 'Arakawa, Hiromu (Story & Art)', 'Score': '9.061 (scored by 141168141,168 users)1 indicates a weighted score.', 'Ranked': "#62 2 based on the top manga page. Please note that 'R18+' titles are excluded.", 'Popularity': '#18', 'Members': '259,424', 'Favorites': '28,244', 'synopsis': "Alchemists are knowledgeable and naturally talented individuals who can manipulate and modify matter due to their art. Yet despite the wide range of possibilities, alchemy is not as all-powerful as most would believe. Human transmutation is strictly forbidden, and whoever attempts it risks severe consequences. Even so, siblings Edward and Alphonse Elric decide to ignore this great taboo and bring their mother back to life. Unfortunately, not only do they fail in resurrecting her, they also pay an extremely high price for their arrogance: Edward loses his left leg and Alphonse his entire body. Furthermore, Edward also gives up his right arm in order to seal his brother's soul into a suit of armor.Years later, the young alchemists travel across the country looking for the Philosopher's Stone, in the hopes of recovering their old bodies with its power. However, their quest for the fated stone also leads them to unravel far darker secrets than they could ever imagine.", 'title': 'Fullmetal Alchemist', 'image': 'https://cdn.myanimelist.net/images/manga/3/243675.jpg'}
+
+
+print(manga.chapters) #prints '116'
 ```
 
 
@@ -33,6 +53,7 @@ print(anime.episodes) #prints '26'
 - animeinfoID
 - mangasearch
 - mangainfo
+- mangainfoID
 - topanime
 - topmanga
 
@@ -108,6 +129,19 @@ mangasearch("Jujutsu kaisen")
 
 ```python
 mangainfo('https://myanimelist.net/manga/96792/Kimetsu_no_Yaiba')
+```
+
+### mangainfoID
+
+```python 
+#syntax
+#mangainfoID(mangaID)
+#mangaID is ID of manga on myanimelist
+
+#returns {'Synonyms': 'High Kyuu!!, HQ!!, Nisekyuu!!', 'Japanese': 'ハイキュー!!', 'English': 'Haikyu!!', 'German': 'Haikyu!!', 'French': 'Haikyu !! - Les As du volley', 'Type': 'Manga', 'Volumes': '45', 'Chapters': '407', 'Status': 'Finished', 'Published': 'Feb  20, 2012 to Jul  20, 2020', 'Genres': 'Award Winning, Sports, School, Team Sports, Shounen', 'Themes': 'School                School,                    Team Sports                Team Sports', 'Demographic': 'Shounen                Shounen', 'Serialization': 'Shounen Jump (Weekly)', 'Authors': 'Furudate, Haruichi (Story & Art)', 'Score': '8.841 (scored by 8648186,481 users)1 indicates a weighted score.', 'Ranked': "#262 2 based on the top manga page. Please note that 'R18+' titles are excluded.", 'Popularity': '#32', 'Members': '182,356', 'Favorites': '16,019', 'synopsis': "The whistle blows. The ball is up. A dig. A set. A spike.Volleyball. A sport where two teams face off, separated by a formidable, wall-like net.The Little Giant, standing at only 170 cm, overcomes the towering net and the wall of blockers. The awe-inspired Shouyou Hinata looks on at the ace's crow-like figure. Determined to reach great heights like the Little Giant, small-statured Hinata finally manages to form a team in his last year of junior high school, and enters his first volleyball tournament. However, his team is utterly defeated in their first game against the powerhouse school Kitagawa Daiichi, led by the genius, but oppressive setter dubbed the King of the Court, Tobio Kageyama.Hinata enrolls into Karasuno High School seeking  to take revenge against Kageyama in an official high school match and to follow in the Little Giant's footsteps—but his plans are ruined when he opens the gymnasium door to find Kageyama as one of his teammates.Now, Hinata must establish himself on the team and work alongside the problematic Kageyama to overcome his shortcomings and to fulfill his dream of making it to the top of the high school volleyball world.Included one-shot:Volume 14: Nisekyuu!!", 'title': 'Haikyuu!!Haikyu!!', 'image': 'https://cdn.myanimelist.net/images/manga/2/258225.jpg'}
+```
+```python
+mangainfoID(35243)
 ```
 
 ### topanime
