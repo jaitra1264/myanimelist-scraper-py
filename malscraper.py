@@ -159,6 +159,8 @@ class Manga():
         except:pass
         try:self.author = self.dict["Authors"]
         except:pass
+        try:self.volumes = self.dict["Volumes"]
+        except:pass
 
     def infoByID(self,query):
         self.dict = mangainfoID(query)
@@ -387,7 +389,7 @@ def mangainfo(query):
 #pass myanimelist manga ID to scrape info
 def mangainfoID(query):
     try:
-        req = requests.get("https://myanimelist.net/manga/"+query)
+        req = requests.get("https://myanimelist.net/manga/"+str(query))
     except Exception as e:
         print("Invalid request")
         print(e)
