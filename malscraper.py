@@ -16,6 +16,8 @@ class Anime:
 
     def info(self,query):
         self.dict = animeinfo(query)
+        try:self.synonyms = self.dict["Synonyms"]
+        except:pass
         try:self.title = self.dict['title']
         except:pass
         try:self.titleJa = self.dict['Japanese']
@@ -61,6 +63,8 @@ class Anime:
 
     def infoByID(self,query):
         self.dict = animeinfoID(query)
+        try:self.synonyms = self.dict["Synonyms"]
+        except:pass
         try:self.title = self.dict['title']
         except:pass
         try:self.titleJa = self.dict['Japanese']
@@ -102,6 +106,99 @@ class Anime:
         try:self.synopsis = self.dict['synopsis']
         except:pass
         try:self.imageurl = self.dict['image']
+        except:pass
+class Manga():
+    
+    def __init__(self):
+        self.dict = "Use info method to get info on an manga"
+
+    def __str__(self):
+        return self.dict
+
+    def search(self,query,searchresult=3,page=1):
+        self.searchResult = mangasearch(query,searchresult,page)
+        return self.searchResult
+
+    def info(self,query):
+        self.dict = mangainfo(query)
+        try:self.synonyms = self.dict["Synonyms"]
+        except:pass
+        try:self.title = self.dict["title"]
+        except:pass
+        try:self.titleJa = self.dict['Japanese']
+        except:pass
+        try:self.titleEn = self.dict['English']
+        except:pass
+        try:self.chapters = self.dict["Chapters"]
+        except:pass
+        try:self.type = self.dict['Type']
+        except:pass
+        try:self.chapters = self.dict['Chapters']
+        except:pass
+        try:self.status = self.dict['Status']
+        except:pass
+        try:self.published = self.dict['Published']
+        except:pass
+        try:self.genre = self.dict['Genres']
+        except:pass
+        try:self.serialization = self.dict["Serialization"]
+        except:pass
+        try:self.score = self.dict['Score'][:5]
+        except:pass
+        try:self.rank = self.dict['Ranked'][:-76]
+        except:pass
+        try:self.popularity = self.dict['Popularity']
+        except:pass
+        try:self.members = self.dict["Members"]
+        except:pass
+        try:self.favorites = self.dict['Favorites']
+        except:pass
+        try:self.synopsis = self.dict['synopsis']
+        except:pass
+        try:self.imageurl = self.dict['image']
+        except:pass
+        try:self.author = self.dict["Authors"]
+        except:pass
+
+    def infoByID(self,query):
+        self.dict = mangainfoID(query)
+        try:self.synonyms = self.dict["Synonyms"]
+        except:pass
+        try:self.title = self.dict["title"]
+        except:pass
+        try:self.titleJa = self.dict['Japanese']
+        except:pass
+        try:self.titleEn = self.dict['English']
+        except:pass
+        try:self.chapters = self.dict["Chapters"]
+        except:pass
+        try:self.type = self.dict['Type']
+        except:pass
+        try:self.chapters = self.dict['Chapters']
+        except:pass
+        try:self.status = self.dict['Status']
+        except:pass
+        try:self.published = self.dict['Published']
+        except:pass
+        try:self.genre = self.dict['Genres']
+        except:pass
+        try:self.serialization = self.dict["Serialization"]
+        except:pass
+        try:self.score = self.dict['Score'][:5]
+        except:pass
+        try:self.rank = self.dict['Ranked'][:-76]
+        except:pass
+        try:self.popularity = self.dict['Popularity']
+        except:pass
+        try:self.members = self.dict["Members"]
+        except:pass
+        try:self.favorites = self.dict['Favorites']
+        except:pass
+        try:self.synopsis = self.dict['synopsis']
+        except:pass
+        try:self.imageurl = self.dict['image']
+        except:pass
+        try:self.author = self.dict["Authors"]
         except:pass
 
 class SearchResult:
@@ -260,12 +357,12 @@ def mangainfo(query):
     manga_dict = {}
     for info in manga:
         try:
-            manga_dict[info.span.text] = info.text.replace('\n','').replace(info.span.text,'').strip()
+            manga_dict[info.span.text.replace(":","")] = info.text.replace('\n','').replace(info.span.text,'').strip()
             if info.span.text == 'Genres:':
                 genre = ''
                 for i in soup.find_all('span',attrs={"itemprop":'genre'}):
                     genre += i.text.strip()+', '
-                manga_dict['Genres:'] = genre[:-2]
+                manga_dict['Genres'] = genre[:-2]
             if info.span.text == 'Score:':
                 manga_dict[info.span.text] = manga_dict[info.span.text][:5] 
         except:
@@ -286,6 +383,48 @@ def mangainfo(query):
     return manga_dict
 #returns a dictionary with all the available info about the manga
 
+#scraping manga info from particular manga page
+#pass myanimelist manga ID to scrape info
+def mangainfoID(query):
+    try:
+        req = requests.get("https://myanimelist.net/manga/"+query)
+    except Exception as e:
+        print("Invalid request")
+        print(e)
+        return
+    soup = BeautifulSoup(req.text,'lxml')
+    manga = soup.find_all("div",class_="spaceit_pad")
+    image = soup.find('div',class_='leftside')
+    title = soup.find('span',class_='h1-title')
+
+    manga_dict = {}
+    for info in manga:
+        try:
+            manga_dict[info.span.text.replace(":","")] = info.text.replace('\n','').replace(info.span.text,'').strip()
+            if info.span.text == 'Genres:':
+                genre = ''
+                for i in soup.find_all('span',attrs={"itemprop":'genre'}):
+                    genre += i.text.strip()+', '
+                manga_dict['Genres'] = genre[:-2]
+            if info.span.text == 'Score:':
+                manga_dict[info.span.text] = manga_dict[info.span.text][:5]
+        except:
+            pass
+
+    try:
+        manga_dict['synopsis'] = soup.find('span',attrs={"itemprop":'description'}).text.replace('\n','').replace('\r','').replace('[Written by MAL Rewrite]','').replace('"','').replace('\\','')
+    except:
+        pass
+
+    try:manga_dict['title'] = title.text
+    except:pass
+
+    try:
+        manga_dict['image'] = image.a.contents[0]["data-src"]
+    except:
+        pass
+    return manga_dict
+#returns a dictionary with all the available info about the manga
 
 #scraping top anime list
 #search result maximum value 49
